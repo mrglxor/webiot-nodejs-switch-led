@@ -473,9 +473,6 @@
       button,
       [type="button"],
       [type="reset"],
-      [type="submit"] {
-        -webkit-appearance: button;
-      }
       button:not(:disabled),
       [type="button"]:not(:disabled),
       [type="reset"]:not(:disabled),
@@ -524,7 +521,6 @@
         height: auto;
       }
       [type="search"] {
-        -webkit-appearance: textfield;
         outline-offset: -2px;
       }
       /* rtl:raw:
@@ -543,7 +539,6 @@
       }
       ::file-selector-button {
         font: inherit;
-        -webkit-appearance: button;
       }
       output {
         display: inline-block;
@@ -11567,24 +11562,20 @@
       }
     </style>
     <script
-        src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
-        integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
-        crossorigin="anonymous"
-        referrerpolicy="no-referrer"
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+      integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
     ></script>
     <script>
-        function ledSwitch(state) {
-        console.log(state);
+      function ledSwitch(state) {
         $.ajax({
           method: "POST",
           url: "https://webiot.up.railway.app/api/led",
           contentType: "application/json",
           data: JSON.stringify({
-            ledState: state
+            ledState: state,
           }),
-          success: function (response) {
-            $("#ledState").html(response == 1 ? "ON" : "OFF");
-          },
           error: function (error) {
             console.error("Error sending LED switch request:", error);
           },
