@@ -77,3 +77,8 @@ void sendRequest() {
 }
 
 ```
+
+## How To Use It
+
+- visit this website : `https://webiot.up.railway.app/`
+- control your led there
