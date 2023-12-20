@@ -1,28 +1,19 @@
 import express from "express";
-import si from "systeminformation";
-import network from "network";
 
 import path from "path";
-import fs from "fs";
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+import { promises as fs } from 'fs';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 const publicRouter = express.Router();
 
-async function getIPAddress() {
-  return new Promise((resolve, reject) => {
-    network.get_private_ip((err, ip) => {
-      if (err) {
-        reject(err);
-      } else {
-        resolve(ip);
-      }
-    });
-  });
-}
-
 publicRouter.get('/', async (req, res) => {
   try {
-    const indexPath = path.join(__dirname, 'src', 'public', 'index.html');
-    const fileContent = await fs.promises.readFile(indexPath, 'utf-8');
+    const indexPath = path.join(__dirname, '../public', 'index.html');
+    const fileContent = await fs.readFile(indexPath, 'utf-8');
     res.send(fileContent);
   } catch (error) {
     console.error('Error fetching system information:', error.message);
