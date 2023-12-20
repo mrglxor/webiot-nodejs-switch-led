@@ -11566,6 +11566,45 @@
         }
       }
     </style>
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+        integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+        crossorigin="anonymous"
+        referrerpolicy="no-referrer"
+    ></script>
+    <script>
+        function ledSwitch(state) {
+        console.log(state);
+        $.ajax({
+          method: "POST",
+          url: "https://webiot.up.railway.app/api/led",
+          contentType: "application/json",
+          data: JSON.stringify({
+            ledState: state
+          }),
+          success: function (response) {
+            $("#ledState").html(response == 1 ? "ON" : "OFF");
+          },
+          error: function (error) {
+            console.error("Error sending LED switch request:", error);
+          },
+        });
+      }
+
+      $(document).ready(function () {
+        const ledState = getState();
+        updateLedState(ledState);
+
+        $("#switch").prop("checked", ledState);
+
+        $("#switch").on("change", function () {
+          var state = $(this).prop("checked");
+          updateLedState(state);
+          saveState(state);
+          ledSwitch(state ? 1 : 0);
+        });
+      });
+    </script>
   </head>
 
   <body>
@@ -11754,43 +11793,7 @@
         </div>
       </div>
     </div>
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
-      integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    ></script>
     <script>
-      function ledSwitch(state) {
-        $.ajax({
-          type: "POST",
-          url: "https://webiot.up.railway.app/api/led",
-          data: {
-            ledState: state,
-          },
-          success: function (response) {
-            $("#ledState").html(response == 1 ? "ON" : "OFF");
-          },
-          error: function (error) {
-            console.error('Error sending LED switch request:', error);
-          },
-        });
-      }
-
-      $(document).ready(function () {
-        const ledState = getState();
-        updateLedState(ledState);
-
-        $("#switch").prop("checked", ledState);
-
-        $("#switch").on("change", function () {
-          var state = $(this).prop("checked");
-          updateLedState(state);
-          saveState(state);
-          ledSwitch(state ? 1 : 0);
-        });
-      });
-
       function updateLedState(state) {
         $("#ledState").html(state ? "ON" : "OFF");
       }
