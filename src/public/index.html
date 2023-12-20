@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WebIOT - Toggle Switch LED</title>
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+
+      .switch-container {
+        display: flex;
+        align-items: center;
+      }
+
+      .switch-label {
+        margin-right: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="switch-container">
+      <label class="switch-label" for="toggleSwitch">Toggle Switch:</label>
+      <input type="checkbox" id="toggleSwitch" />
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const toggleSwitch = document.getElementById("toggleSwitch");
+        const savedSwitchState = localStorage.getItem("switchState");
+
+        if (savedSwitchState === "on") {
+          toggleSwitch.checked = true;
+          console.log("Switch is ON");
+        }
+
+        toggleSwitch.addEventListener("change", function () {
+          if (toggleSwitch.checked) {
+            console.log("Switch is ON");
+            localStorage.setItem("switchState", "on");
+          } else {
+            console.log("Switch is OFF");
+            localStorage.setItem("switchState", "off");
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

@@ -2,6 +2,9 @@ import express from "express";
 import si from "systeminformation";
 import network from "network";
 
+import path from "path";
+import fs from "fs";
+
 const publicRouter = express.Router();
 
 async function getIPAddress() {
@@ -18,27 +21,9 @@ async function getIPAddress() {
 
 publicRouter.get('/', async (req, res) => {
   try {
-    const systemInfo = await si.system();
-    const osInfo = await si.osInfo();
-    const ipConfig = await getIPAddress();
-
-    const deviceInfo = {
-      type: systemInfo.model,
-      name: osInfo.distro,
-      ipConfig: ipConfig,
-      currentTime: new Date().toISOString()
-    };
-
-    res.json({
-      data: {
-        message: "Welcome to the RESTful API of WebIot.",
-        api: "Switch LED",
-        status: "OK",
-        currentDevice: deviceInfo
-      },
-      author: "Muhamad Farhan",
-      github: "https://github.com/mrglxor"
-    });
+    const indexPath = path.join(__dirname, '../public', 'index.html');
+    const fileContent = await fs.promises.readFile(indexPath, 'utf-8');
+    res.send(fileContent);
   } catch (error) {
     console.error('Error fetching system information:', error.message);
     res.status(500).json({ error: 'Internal Server Error' });

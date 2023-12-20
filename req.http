@@ -1,0 +1,8 @@
+### SET
+POST https://webiot.up.railway.app/api/led
+Content-Type: application/json
+Accept: application/json
+
+{
+    "ledState": 0
+}
