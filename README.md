@@ -54,12 +54,12 @@ void sendRequest() {
   if (httpCode > 0) {
     if (httpCode == HTTP_CODE_OK) {
       String response = http.getString();
-      Serial.println("Response from server: " + response.stateLed);
+      Serial.println("Response from server: " + response);
 
       std::map<String, int> responseMap = {{"1", HIGH}, {"0", LOW}};
 
-      if (responseMap.find(response.stateLed) != responseMap.end()) {
-        digitalWrite(led, responseMap[response.stateLed]);
+      if (responseMap.find(response) != responseMap.end()) {
+        digitalWrite(led, responseMap[response]);
       } else {
         Serial.println("Invalid response from server");
       }
