@@ -16,7 +16,7 @@ const getState = async (req, res) => {
             });
         }
 
-        res.send(stateLed.ledState);
+        res.json(stateLed.ledState);
     } catch (error) {
         console.error(error);
         res.status(500).json({
