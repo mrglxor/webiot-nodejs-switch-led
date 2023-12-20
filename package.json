@@ -1,0 +1,24 @@
+{
+  "name": "nodejs-iot-restfull-api-switch-led",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/main.js",
+  "scripts": {
+    "dev": "nodemon src/main.js",
+    "start": "node src/main.js"
+  },
+  "author": "Muhamad Farhan",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "@prisma/client": "^5.7.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "network": "^0.6.1",
+    "systeminformation": "^5.21.20"
+  },
+  "devDependencies": {
+    "prisma": "^5.7.1"
+  }
+}
