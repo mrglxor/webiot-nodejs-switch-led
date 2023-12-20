@@ -21,7 +21,7 @@ This project for your testing connection between NodeMCU ESP8266 to Nodejs as se
 
 const char *ssid = "Wifi Name";
 const char *password = "Wifi Pass";
-String api = "api/rute/to";
+String api = "webiot.up.railway.app";
 String BASE_URL = "https://" + String(api) + "/api";
 WiFiClient client;
 HTTPClient http;
@@ -54,12 +54,12 @@ void sendRequest() {
   if (httpCode > 0) {
     if (httpCode == HTTP_CODE_OK) {
       String response = http.getString();
-      Serial.println("Response from server: " + response);
+      Serial.println("Response from server: " + response.stateLed);
 
       std::map<String, int> responseMap = {{"1", HIGH}, {"0", LOW}};
 
-      if (responseMap.find(response) != responseMap.end()) {
-        digitalWrite(led, responseMap[response]);
+      if (responseMap.find(response.stateLed) != responseMap.end()) {
+        digitalWrite(led, responseMap[response.stateLed]);
       } else {
         Serial.println("Invalid response from server");
       }
