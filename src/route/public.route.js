@@ -21,7 +21,7 @@ async function getIPAddress() {
 
 publicRouter.get('/', async (req, res) => {
   try {
-    const indexPath = path.join(__dirname, '../public', 'index.html');
+    const indexPath = path.join(__dirname, 'src', 'public', 'index.html');
     const fileContent = await fs.promises.readFile(indexPath, 'utf-8');
     res.send(fileContent);
   } catch (error) {
